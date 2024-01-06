@@ -1,17 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
-public class MoveForwardScript : MonoBehaviour
+public class Move : MonoBehaviour
 {
     [SerializeField] private float _speed;
+
     private bool _isMoving = true;
 
     private void Start()
     {
-        StartCoroutine(Move());
+        StartCoroutine(MoveObject());
     }
 
-    private IEnumerator Move()
+    private IEnumerator MoveObject()
     {
         while (_isMoving)
         {
@@ -20,4 +21,6 @@ public class MoveForwardScript : MonoBehaviour
             yield return null;
         }
     }
+
+    
 }
