@@ -5,37 +5,33 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField, Min(1)] private float _timer;
-    [SerializeField] private GameObject _cube;
-    [SerializeField] private bool _isON;
+    [SerializeField] private Mover _cube;
 
-    private List<Vector3> _spawnPoints = new List<Vector3>();
-    private float _timeLeft = 0;
+    private List<Transform> _spawnPoints = new List<Transform>();
 
-    private void Start()
+    private void Awake()
     {
         foreach (Transform child in transform)
         {
-            Debug.Log(child.name);
-            _spawnPoints.Add(child.position);
+            _spawnPoints.Add(child);
         }
-
-        StartCoroutine(SpawnCube());
     }
 
-    private IEnumerator SpawnCube()
+    private void Start()
     {
-        while(_isON)
-        {
-            _timeLeft += Time.deltaTime;
+        StartCoroutine(Spawn());
+    }
 
-            if(_timeLeft >= _timer)
-            {
-                Instantiate(_cube, _spawnPoints[Random.Range(0, _spawnPoints.Count)], new Quaternion(Random.Range(0, 90), Random.Range(0, 90), Random.Range(0, 90), 0f));
+    private IEnumerator Spawn()
+    {
+        Quaternion randomRotation = new Quaternion(Random.Range(0, 90), Random.Range(0, 90), Random.Range(0, 90), 0f);
 
-                _timeLeft = 0;
-            }
+        Mover clone = Instantiate(_cube, _spawnPoints[Random.Range(0, _spawnPoints.Count)]);
 
-            yield return null;
-        }
+        clone.transform.rotation = randomRotation;
+        
+        yield return new WaitForSeconds(_timer);
+
+        StartCoroutine(Spawn());
     }
 }

@@ -184,8 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timer: 2
-  _cube: {fileID: 6494547194468504999, guid: 2c161a93cc0f355438a6f7e97094d687, type: 3}
-  _isON: 1
+  _cube: {fileID: -3471983390480928810, guid: 2c161a93cc0f355438a6f7e97094d687, type: 3}
 --- !u!4 &484253548
 Transform:
   m_ObjectHideFlags: 0
